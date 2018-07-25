@@ -5,13 +5,24 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+import random
 from scrapy import signals
+from doubanMovie.settings import IPPOOL
 
 
 class DoubanmovieSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
+
+    # # 代理
+    # def __init__(self, ip=''):
+    #     self.ip = ip
+    #
+    # def process_request(self, request, spider):
+    #     thisip = random.choice(IPPOOL)
+    #     print("当前代理的ip :" + thisip)
+    #     request.meta["proxy"] = "http://" + thisip
 
     @classmethod
     def from_crawler(cls, crawler):

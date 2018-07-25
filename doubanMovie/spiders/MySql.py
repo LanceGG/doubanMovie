@@ -16,7 +16,7 @@ class mysql:
     def getCursor(self):
 
         # 建立数据库连接
-        self.db = pymysql.connect(self.host, self.user, self.pwd, self.dbname)
+        self.db = pymysql.connect(self.host, self.user, self.pwd, self.dbname, use_unicode=True, charset="utf8")
 
         # 创建游标对象
         cur = self.db.cursor()

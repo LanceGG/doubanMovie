@@ -46,7 +46,7 @@ class DoubanMovie(Spider):
 
     def start_requests(self):
         url = self.get_url()
-        yield Request(url, headers=self.headers, meta={'proxy': 'http://113.87.195.5:11974'}, callback=self.parse)
+        yield Request(url, callback=self.parse)
 
     def get_url(self):
         return str(self.baseUrl.format(urllib.parse.quote(self.tags[self.tagNum]), self.num))
@@ -58,23 +58,23 @@ class DoubanMovie(Spider):
                 movieItem['classify'] = self.tags[self.tagNum]
             print("影片Outer")
             print(data)
-            SaveData().save_media_data(data)
+            # SaveData().save_media_data(data)
 
             # # 遍历循环, 爬电影, 电视剧, 综艺, 动画, 纪录片, 短片
             if len(data) != 0:
                 self.num += 20
                 url = self.get_url()
-                yield Request(url, headers=self.headers, callback=self.parse)
+                yield Request(url, callback=self.parse)
             else:
                 if self.tagNum < 5:
                     self.tagNum += 1
                     self.num = 0
                     url = self.get_url()
-                    yield Request(url, headers=self.headers, callback=self.parse)
+                    yield Request(url, callback=self.parse)
         else:
             url = response.url
             print ("影片Outer" + response.status + ": 访问失败, 重新访问")
-            yield Request(url, headers=self.headers, callback=self.parse)
+            yield Request(url, callback=self.parse)
 
         # # 保存查到的影片的基础数据
         # movieFile = './movie/movie.json'
