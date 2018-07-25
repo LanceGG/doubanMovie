@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from scrapy.spiders import Spider
 from scrapy import Request
 import urllib.parse
@@ -5,10 +6,11 @@ import json
 import os
 from scrapy.selector import Selector
 from doubanMovie.items import DoubanMovieItem
+from doubanMovie.spiders.SaveData import SaveData
 
 
 class DoubanMovie(Spider):
-    name = 'douban'
+    name = 'doubanMovie'
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -44,7 +46,7 @@ class DoubanMovie(Spider):
 
     def start_requests(self):
         url = self.get_url()
-        yield Request(url, headers=self.headers, callback=self.parse)
+        yield Request(url, headers=self.headers, meta={'proxy': 'http://113.87.195.5:11974'}, callback=self.parse)
 
     def get_url(self):
         return str(self.baseUrl.format(urllib.parse.quote(self.tags[self.tagNum]), self.num))
@@ -52,21 +54,23 @@ class DoubanMovie(Spider):
     def parse(self, response):
         if 200 == response.status:
             data = json.loads(response.body.decode('utf-8'))['data']
+            for movieItem in data:
+                movieItem['classify'] = self.tags[self.tagNum]
             print("影片Outer")
             print(data)
-            self.movieList = self.movieList + data
+            SaveData().save_media_data(data)
 
             # # 遍历循环, 爬电影, 电视剧, 综艺, 动画, 纪录片, 短片
-            # if len(data) != 0:
-            #     self.num += 20
-            #     url = self.get_url()
-            #     yield Request(url, headers=self.headers, callback=self.parse)
-            # else:
-            #     if self.tagNum < 5:
-            #         self.tagNum += 1
-            #         self.num = 0
-            #         url = self.get_url()
-            #         yield Request(url, headers=self.headers, callback=self.parse)
+            if len(data) != 0:
+                self.num += 20
+                url = self.get_url()
+                yield Request(url, headers=self.headers, callback=self.parse)
+            else:
+                if self.tagNum < 5:
+                    self.tagNum += 1
+                    self.num = 0
+                    url = self.get_url()
+                    yield Request(url, headers=self.headers, callback=self.parse)
         else:
             url = response.url
             print ("影片Outer" + response.status + ": 访问失败, 重新访问")
@@ -81,7 +85,7 @@ class DoubanMovie(Spider):
         # for dataItem in self.movieList:
         #     # 影片详情
         #     detailUrl = dataItem['url']
-        #     yield Request(detailUrl, headers=self.headers, callback=self.parse_movie_detail)
+        #     yield Request(detailUrl, headers=self.headers, meta={'classify': dataItem['classify'], 'id': dataItem['id']}, callback=self.parse_movie_detail)
         # movieDetailFile = './movie/movieDetail.json'
         # with open(movieDetailFile, 'w') as f:
         #     json.dump(self.movieDetailList, f)
@@ -102,43 +106,19 @@ class DoubanMovie(Spider):
         # actorFile = './movie/movieAward.json'
         # with open(actorFile, 'w') as f:
         #     json.dump(self.movieList, f)
-
-        # 查找影片的相关图片id
-        for dataItem in self.movieList:
-            # 影片相关图片
-            self.moviePicIds = []
-            picUrl = self.get_pic_url(dataItem['id'], 0)
-            yield Request(picUrl, headers=self.headers, meta={'movieId': dataItem['id'], 'picNum': 0, 'moviePicIds': []}, callback=self.parse_movie_pic)
-
-        # 根据影片的id下载图片
-        for movieId in self.moviePic:
-            picIds = self.moviePic[movieId]
-            os.mkdir("./moviePic/" + str(movieId))
-            for picId in picIds:
-                headers = {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Accept-Encoding': 'gzip, deflate, br',
-                    'Accept-Language': 'zh-CN,zh;q=0.9',
-                    'Connection': 'keep-alive',
-                    'host': 'movie.douban.com',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-                    'Cookie': 'bid=Objb_yrj_J8; gr_user_id=4264a3ce-820b-4616-90e0-9a187466b3f1; ll="118172"; _vwo_uuid_v2=C9521AE5387ADFBF455CDF22AC9B6144|ab2fc29361bd1ebbeecca1fa6686d28c; viewed="5980062_26692216_3259440"; __utmz=30149280.1529829901.15.14.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __yadk_uid=02pWxtVnBlRpQHZwvaJOMHdftdnYeLRu; _pk_ses.100001.4cf6=*; __utma=30149280.1220139084.1501422800.1532363369.1532446977.18; __utmb=30149280.0.10.1532446977; __utmc=30149280; __utmc=223695111; __utma=223695111.1517590416.1532359178.1532446977.1532447181.4; __utmz=223695111.1532447181.4.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmt=1; dbcl2="62576053:2d22ZNUsOEk"; ck=T-u6; __utmb=223695111.19.10.1532447181; push_noty_num=0; push_doumail_num=0; _pk_id.100001.4cf6=001d12c5ce3d950f.1532359178.3.1532447860.1532364881.'}
-                headers['Referer'] = 'https://movie.douban.com/photos/photo/{}/'.format(picId)
-                downPicUrl = 'https://img3.doubanio.com/view/photo/raw/public/p{}.jpg'.format(picId)
-                item = DoubanMovieItem()
-
-                item['headers'] = headers
-                item['detailURL'] = downPicUrl
-                item['path'] = "./moviePic/" + str(movieId)
-                item['fileName'] = str(picId)
-
-                yield item
+        #
+        # # 查找影片的相关图片id
+        # for dataItem in self.movieList:
+        #     # 影片相关图片
+        #     self.moviePicIds = []
+        #     picUrl = self.get_pic_url(dataItem['id'], 0)
+        #     yield Request(picUrl, headers=self.headers, meta={'movieId': dataItem['id'], 'picNum': 0, 'moviePicIds': []}, callback=self.parse_movie_pic)
 
     def parse_movie_detail(self, response):
         if 200 == response.status:
             movieDetail = {}
             # ID(ALL)
-            id = response.url.replace('https://movie.douban.com/subject/', '').replace('/', '')
+            id = response.meta['id']
             movieDetail['id'] = id
 
             # 剧集标题(ALL)
@@ -150,7 +130,7 @@ class DoubanMovie(Spider):
             movieDetail['year'] = year
 
             # 分类(ALL)
-            classify = self.tags[self.tagNum]
+            classify = response.meta['classify']
             movieDetail['classify'] = classify
 
             # 导演(ALL)
@@ -268,7 +248,7 @@ class DoubanMovie(Spider):
         else:
             url = response.url
             print ("影片Detail" + response.status + ": 访问失败, 重新访问")
-            yield Request(url, headers=self.headers, callback=self.parse_movie_detail)
+            yield Request(url, headers=self.headers,meta={'classify': response.meta['classify'], 'id': response.meta['id']}, callback=self.parse_movie_detail)
 
     def parse_movie_rewards(self, response):
         if response.status == 200:
@@ -339,6 +319,7 @@ class DoubanMovie(Spider):
         if 200 == response.status:
             picIds = response.selector.xpath("//ul[@class='poster-col3 clearfix']/li/attribute::data-id").extract()
             if len(picIds) == 0:
+                self.down_movie_pic(response.meta['movieId'], response.meta['moviePicIds'])
                 self.moviePic[response.meta['movieId']] = response.meta['moviePicIds']
             else:
                 print("图片id")
@@ -347,3 +328,11 @@ class DoubanMovie(Spider):
                 picNum = response.meta['picNum'] + 30
                 url = self.get_pic_url(response.meta['movieId'], picNum)
                 yield Request(url, headers=self.headers, meta={'movieId': response.meta['movieId'], 'picNum': picNum, 'moviePicIds': moviePicIds}, callback=self.parse_movie_pic)
+
+    # 下载影片
+    def down_movie_pic(self, movieId, moviePicIds):
+        item = DoubanMovieItem()
+        item['movieId'] = movieId
+        item['moviePicIds'] = moviePicIds
+        yield item
+
