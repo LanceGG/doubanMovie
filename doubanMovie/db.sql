@@ -1,4 +1,13 @@
-create table media (
+use mediadb;
+
+create table mediadb.history_data (
+	id int auto_increment primary key,
+	target_num int default 0,
+    num int default 0
+);
+insert into mediadb.history_data (id, target_num, num) values (1, 0, 0);
+
+create table mediadb.media_simple (
 	media_id int auto_increment primary key,
 	id int not NULL,
     title varchar(200),
@@ -8,7 +17,7 @@ create table media (
     index media_real_id ( id )
 );
 
-create table media_detail (
+create table mediadb.media_detail (
 	media_detail_id int auto_increment primary key,
 	id int not NULL,
     title varchar(200),
@@ -36,16 +45,16 @@ create table media_detail (
     index media_detail_real_id (id)
 );
 
-create table media_recommend (
+create table mediadb.media_recommend (
 	media_recommend_id int auto_increment primary key,
 	id int not NULL,
     title varchar(200),
     recommend_id int,
-    recomment_title varchar(200),
+    recommend_title varchar(200),
     index media_recommend_real_id (id)
 );
 
-create table media_attender (
+create table mediadb.media_attender (
 	media_attender_id int auto_increment primary key,
 	id int not NULL,
     title varchar(200),
@@ -53,4 +62,13 @@ create table media_attender (
     attender_name varchar(240),
     attender_type varchar(16),
     index media_attender_real_id (id)
-)
+);
+
+create table mediadb.query_history_data (
+	type varchar(10),
+    num int
+);
+insert into mediadb.query_history_data (type, num) values ('DETAIL', 0);
+insert into mediadb.query_history_data (type, num) values ('ACTOR', 0);
+insert into mediadb.query_history_data (type, num) values ('AWARD', 0);
+insert into mediadb.query_history_data (type, num) values ('PIC', 0);

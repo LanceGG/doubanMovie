@@ -22,7 +22,31 @@ class DoubanmovieSpiderMiddleware(object):
     # def process_request(self, request, spider):
     #     thisip = random.choice(IPPOOL)
     #     print("当前代理的ip :" + thisip)
-    #     request.meta["proxy"] = "http://" + thisip
+    #     # request.meta["proxy"] = "http://" + thisip
+    #     authHeader = self.generate_sign()
+    #     request.meta["proxy"] = "http://" + "s5.proxy.mayidaili.com:8123"
+    #     request.headers['Mayi-Authorization'] = authHeader
+    #     request.headers['User-Agent'] = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1"
+    #
+    # def generate_sign(self):
+    #     appkey = "204657939"
+    #     secret = "3f76b61a7d7199d78f2c8298ae9046bc"
+    #
+    #     paramMap = {
+    #         "app_key": appkey,
+    #         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+    #     }
+    #
+    #     keys = sorted(paramMap)
+    #     codes = "%s%s%s" % (secret, str().join('%s%s' % (key, paramMap[key]) for key in keys), secret)
+    #
+    #     sign = hashlib.md5(codes.encode('utf-8')).hexdigest().upper()
+    #
+    #     paramMap["sign"] = sign
+    #
+    #     keys = paramMap.keys()
+    #     authHeader = "MYH-AUTH-MD5 " + str('&').join('%s=%s' % (key, paramMap[key]) for key in keys)
+    #     return authHeader
 
     @classmethod
     def from_crawler(cls, crawler):

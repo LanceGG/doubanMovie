@@ -48,7 +48,7 @@ class mysql:
         self.db.close()
 
         # 返回查询的数据
-        return dataList, row
+        return dataList
 
     # 删除操作
     def deleteOperation(self, sql):

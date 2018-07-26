@@ -21,11 +21,10 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9',
     'Connection': 'keep-alive',
-    'host': 'movie.douban.com',
-    'Referer': 'https://movie.douban.com/tag/',
+#    'host': 'movie.douban.com',
+  #  'Referer': 'https://movie.douban.com/tag/',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-#    'Cookie': 'bid=U96JfASK_Wc; __utmc=30149280; __utmz=30149280.1532341520.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=223695111; __utmz=223695111.1532341520.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __yadk_uid=FN0E9MQ2ITxNOmIywZhwODo2uK8PLLU5; ap=1; ct=y; ll="118282"; _vwo_uuid_v2=DC76AA880CDB3905CF9F1836C935C5EC2|03db08648649e8cd3fa0145b2428f48a; _pk_ses.100001.4cf6=*; __utma=30149280.1122136196.1532341520.1532393838.1532397873.4; __utmb=30149280.0.10.1532397873; __utma=223695111.134179281.1532341520.1532393838.1532397873.4; __utmb=223695111.0.10.1532397873; ps=y; dbcl2="62576053:8HYw7Qs7p0U"; ck=_RjC; push_noty_num=0; push_doumail_num=0; _pk_id.100001.4cf6=2864ef4f94aaf12f.1532341520.4.1532399007.1532396026.'
-
+   # 'Cookie': 'bid=U96JfASK_Wc; __utmc=30149280; __utmc=223695111; __utmz=223695111.1532341520.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __yadk_uid=FN0E9MQ2ITxNOmIywZhwODo2uK8PLLU5; ap=1; ct=y; ll="118282"; _vwo_uuid_v2=DC76AA880CDB3905CF9F1836C935C5EC2|03db08648649e8cd3fa0145b2428f48a; ps=y; push_noty_num=0; push_doumail_num=0; __utmv=30149280.6257; douban-fav-remind=1; __utmz=30149280.1532566392.19.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; _pk_ses.100001.4cf6=*; __utma=30149280.1122136196.1532341520.1532583633.1532588626.24; __utmb=30149280.0.10.1532588626; __utma=223695111.134179281.1532341520.1532583633.1532588627.21; __utmb=223695111.0.10.1532588627; dbcl2="62576053:zUfhc0ypBMo"; ck=IIlM; as="https://sec.douban.com/b?r=https%3A%2F%2Fmovie.douban.com%2Fj%2Fnew_search_subjects%3Fsort%3DT%26range%3D0%2C10%26tags%3D%25E7%2594%25B5%25E5%25BD%25B1%26start%3D0"; _pk_id.100001.4cf6=2864ef4f94aaf12f.1532341520.20.1532588882.1532583640.'
 }
 IPPOOL = [
     '27.209.5.55:17255',
@@ -100,12 +99,12 @@ DOWNLOADER_MIDDLEWARES = {
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16) 并发请求数
-CONCURRENT_REQUESTS = 1
+CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
