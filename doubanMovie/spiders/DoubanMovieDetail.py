@@ -147,7 +147,6 @@ class DoubanMovieDetail(Spider):
         movieDetail['tags'] = tags
 
         # 剧情简介(ALL)
-        report = ''
         reportList = response.selector.xpath("//div[@class='indent']/span")[
             len(response.selector.xpath("//div[@class='indent']/span")) - 2].xpath("./text()").extract()
         movieDetail['report'] = ''.join(reportList)

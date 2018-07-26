@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d94d24a-45fa-403d-9a32-9d3ff25680d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieAward.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doubanMovie/spiders/DoubanPerformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doubanMovie/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doubanMovie/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/middlewares.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doubanMovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doubanMovie/spiders/MySql.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/spiders/MySql.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doubanMovie/spiders/SaveData.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/spiders/SaveData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py" beforeDir="false" afterPath="$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/doubanMovie$doubanMovie.coverage" NAME="doubanMovie Coverage Results" MODIFIED="1532600691396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/doubanMovie$doubanMovie.coverage" NAME="doubanMovie Coverage Results" MODIFIED="1532604359184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -36,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="doubanMovie.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="doubanMovie.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+            <state relative-caret-position="-337">
+              <caret line="39" column="46" lean-forward="true" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
               <folding>
                 <element signature="e#24#57#0" expanded="true" />
               </folding>
@@ -48,26 +41,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoubanMovieAward.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieAward.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doubanMovie/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-              <folding>
-                <element signature="e#24#57#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="208">
+              <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoubanPerformer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanPerformer.py">
+      <file leaf-file-name="db.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doubanMovie/db.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
-              <folding>
-                <element signature="e#24#57#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="133">
+              <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -75,20 +62,11 @@
       <file leaf-file-name="DoubanMovieDetail.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2333">
-              <caret line="178" selection-start-line="178" selection-end-line="178" />
+            <state relative-caret-position="302">
+              <caret line="151" column="27" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="27" />
               <folding>
                 <element signature="e#24#57#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="51" lean-forward="true" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -150,13 +128,13 @@
         <option value="$PROJECT_DIR$/doubanMovie/items.py" />
         <option value="$PROJECT_DIR$/doubanMovie/ippool.py" />
         <option value="$PROJECT_DIR$/doubanMovie/spiders/DoubanPerformer.py" />
-        <option value="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py" />
         <option value="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieAward.py" />
-        <option value="$PROJECT_DIR$/doubanMovie/settings.py" />
         <option value="$PROJECT_DIR$/doubanMovie/middlewares.py" />
         <option value="$PROJECT_DIR$/doubanMovie/spiders/SaveData.py" />
         <option value="$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py" />
         <option value="$PROJECT_DIR$/doubanMovie/spiders/MySql.py" />
+        <option value="$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py" />
+        <option value="$PROJECT_DIR$/doubanMovie/settings.py" />
       </list>
     </option>
   </component>
@@ -355,14 +333,14 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3839572" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12153518" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.38370848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15831557" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4437299" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.30439442" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -381,13 +359,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py</url>
-          <line>62</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -703,13 +674,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm2017.2/system/python_stubs/-2036615904/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/doubanMovie/db.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doubanMovie/ippool.py" />
     <entry file="file://D:/anaconda3/Lib/site-packages/scrapy/core/downloader/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -752,37 +716,10 @@
     <entry file="file://$USER_HOME$/Desktop/proxy_test.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/doubanMovie/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doubanMovie/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2333">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-          <folding>
-            <element signature="e#24#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanPerformer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
-          <folding>
-            <element signature="e#24#57#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -813,13 +750,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py">
+    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanPerformer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="63" column="28" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#24#57#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/DoubanMovieDetail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="151" column="27" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="27" />
+          <folding>
+            <element signature="e#24#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doubanMovie/spiders/doubanMovie.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-337">
+          <caret line="39" column="46" lean-forward="true" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
+          <folding>
+            <element signature="e#24#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doubanMovie/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doubanMovie/db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
         </state>
       </provider>
     </entry>

@@ -7,6 +7,7 @@ create table mediadb.history_data (
 );
 insert into mediadb.history_data (id, target_num, num) values (1, 0, 0);
 
+drop table mediadb.media_simple;
 create table mediadb.media_simple (
 	media_id int auto_increment primary key,
 	id int not NULL,
@@ -17,6 +18,7 @@ create table mediadb.media_simple (
     index media_real_id ( id )
 );
 
+drop table mediadb.media_detail;
 create table mediadb.media_detail (
 	media_detail_id int auto_increment primary key,
 	id int not NULL,
@@ -33,13 +35,14 @@ create table mediadb.media_detail (
     episodes varchar(10),
     along_run_time varchar(10),
     alias varchar(200),
-    imdb_id varchar(16),
+    imdb_id varchar(32),
     score varchar(10),
     stars5 varchar(20),
     stars4 varchar(20),
     stars3 varchar(20),
     stars2 varchar(20),
     stars1 varchar(20),
+    report varchar(6000),
     people_num varchar(10),
     tags varchar(300),
     index media_detail_real_id (id)
@@ -72,3 +75,16 @@ insert into mediadb.query_history_data (type, num) values ('DETAIL', 0);
 insert into mediadb.query_history_data (type, num) values ('ACTOR', 0);
 insert into mediadb.query_history_data (type, num) values ('AWARD', 0);
 insert into mediadb.query_history_data (type, num) values ('PIC', 0);
+
+create table mediadb.media_actor (
+	media_actor_id int auto_increment primary key,
+    id int not NULL,
+    sex varchar(10),
+    birthday varchar(20),
+    address varchar(100),
+    occupation varchar(500),
+    en_name varchar(200),
+    cn_name varchar(200),
+    members varchar(200),
+    imdb_id varchar(32),
+)
