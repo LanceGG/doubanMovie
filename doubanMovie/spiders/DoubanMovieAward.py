@@ -7,15 +7,16 @@ from doubanMovie.spiders.SaveData import SaveData
 
 class DoubanMovieAward(Spider):
     name = 'doubanMovieAward'
+    type = 'AWARD'
 
     def start_requests(self):
-        history = SaveData().query_media_history('AWARD')[0][1]
-        mediaDataList = SaveData().query_media_data(history, 1)[0]
-        if len(mediaDataList) > 0:
-            dataItem = mediaDataList
+        history = SaveData().query_media_history(self.type)[0][1]
+        mediaAwardList = SaveData().query_media_data(history, 1)[0]
+        if len(mediaAwardList) > 0:
+            dataItem = mediaAwardList
             awardUrl = dataItem[4] + 'awards/'
             yield Request(awardUrl,
-                          meta={'classify': dataItem[5], 'id': dataItem[1], 'title': dataItem[2]},
+                          meta={'history': history + 1, 'id': str(dataItem[1]), 'title': dataItem[2]},
                           callback=self.parse_movie_reward)
 
     def parse_movie_reward(self, response):
@@ -46,5 +47,67 @@ class DoubanMovieAward(Spider):
             awardType['awardList'] = awardList
             awardTypeList.append(awardType)
         movieReward['awardTypeList'] = awardTypeList
+        dataList = self.get_award_sql(movieReward)
+        SaveData().save_media_award(dataList)
+        SaveData().update_media_history(self.type)
         print ("影片Reward")
         print (movieReward)
+
+        mediaAwardList = SaveData().query_media_data(response.meta['history'], 1)[0]
+        if len(mediaAwardList) > 0:
+            dataItem = mediaAwardList
+            awardUrl = dataItem[4] + 'awards/'
+            yield Request(awardUrl,
+                          meta={'id': str(dataItem[1]), 'title': dataItem[2],
+                                'history': response.meta['history'] + 1},
+                          callback=self.parse_movie_reward)
+
+    def get_award_sql(self, movieReward):
+        dataList = []
+        if len(movieReward['awardTypeList']) > 0:
+            for awardType in movieReward['awardTypeList']:
+                if len(awardType['awardList']) > 0:
+                    for award in awardType['awardList']:
+                        if len(award['awardUserList']) > 0:
+                            for user in award['awardUserList']:
+                                data = {}
+                                data['id'] = movieReward['id']
+                                data['title'] = movieReward['title']
+                                data['awardName'] = awardType['name']
+                                data['awardYear'] = awardType['year']
+                                data['awardType'] = award['name']
+                                data['awardUserId'] = user['id']
+                                data['awardUserName'] = user['name']
+                                dataList.append(data)
+                        else:
+                            data = {}
+                            data['id'] = movieReward['id']
+                            data['title'] = movieReward['title']
+                            data['awardName'] = awardType['name']
+                            data['awardYear'] = awardType['year']
+                            data['awardType'] = award['name']
+                            data['awardUserId'] = ''
+                            data['awardUserName'] = ''
+                            dataList.append(data)
+                else:
+                    data = {}
+                    data['id'] = movieReward['id']
+                    data['title'] = movieReward['title']
+                    data['awardName'] = awardType['name']
+                    data['awardYear'] = awardType['year']
+                    data['awardType'] = ''
+                    data['awardUserId'] = ''
+                    data['awardUserName'] = ''
+                    dataList.append(data)
+        else:
+            data = {}
+            data['id'] = movieReward['id']
+            data['title'] = movieReward['title']
+            data['awardName'] = ''
+            data['awardYear'] = ''
+            data['awardType'] = ''
+            data['awardUserId'] = ''
+            data['awardUserName'] = ''
+            dataList.append(data)
+
+        return dataList

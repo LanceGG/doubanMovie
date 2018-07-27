@@ -19,20 +19,20 @@ class SaveData:
         sql = "INSERT INTO `mediadb`.`media_detail` (`id`,`title`,`title_long`,`m_year`,`classify`," \
               "`m_type`,`country`,`m_language`,`release_date`,`runtime`,`season`,`episodes`,`along_run_time`,`alias`," \
               "`imdb_id`,`score`,`stars5`,`stars4`,`stars3`,`stars2`,`stars1`,`people_num`,`tags`)VALUES"
-        sql = sql + "('" + data['id'].replace("'", "''") + "', '" + data['title'].replace("'", "''") + "', '" + data['titleLong'].replace("'", "''") + "', '" + data['year'].replace("'", "''")\
-              + "', '" + data['classify'].replace("'", "''") + "', '" + data['type'].replace("'", "''") + "', '" + data['country'].replace("'", "''") + "', '" + data['language'].replace("'", "''")\
-              + "', '" + data['releaseDate'].replace("'", "''") + "', '" + data['runtime'].replace("'", "''") + "', '" + data['season'].replace("'", "''") + "', '" + data['episodes'].replace("'", "''")\
-              + "', '" + data['alongRuntime'].replace("'", "''") + "', '" + data['alias'].replace("'", "''") + "', '" + data['imdbId'].replace("'", "''") + "', '" + data['score'].replace("'", "''")\
-              + "', '" + data['stars5'].replace("'", "''") + "', '" + data['stars4'].replace("'", "''") + "', '" + data['stars3'].replace("'", "''") + "', '" + data['stars2'].replace("'", "''")\
-              + "', '" + data['stars1'].replace("'", "''") + "', '" + data['peopleNum'].replace("'", "''") + "', '" + data['tags'].replace("'", "''") + "')"
+        sql = sql + "('" + data['id'].replace("'", "''") + "', '" + data['title'].replace("'", "''") + "', '" + data['titleLong'].replace("'", "''") + "', '" + data['year'].replace("'", "''") \
+              + "', '" + data['classify'].replace("'", "''") + "', '" + data['type'].replace("'", "''") + "', '" + data['country'].replace("'", "''") + "', '" + data['language'].replace("'", "''") \
+              + "', '" + data['releaseDate'].replace("'", "''") + "', '" + data['runtime'].replace("'", "''") + "', '" + data['season'].replace("'", "''") + "', '" + data['episodes'].replace("'", "''") \
+              + "', '" + data['alongRuntime'].replace("'", "''") + "', '" + data['alias'].replace("'", "''") + "', '" + data['imdbId'].replace("'", "''") + "', '" + data['score'].replace("'", "''") \
+              + "', '" + data['rating']['stars5'].replace("'", "''") + "', '" + data['rating']['stars4'].replace("'", "''") + "', '" + data['rating']['stars3'].replace("'", "''") + "', '" + data['rating']['stars2'].replace("'", "''") \
+              + "', '" + data['rating']['stars1'].replace("'", "''") + "', '" + data['rating']['peopleNum'].replace("'", "''") + "', '" + data['tags'].replace("'", "''") + "');"
         mysql().insertOperation(sql)
 
     # 插入剧集推荐
     def save_media_recommend(self, recommendList, id, title):
-        sql = "insert into mediadb.media_detail (id, title, recommend_id, recommend_title) values "
+        sql = "insert into mediadb.media_recommend (id, title, recommend_id, recommend_title) values "
         for i in range(len(recommendList)):
             sql = sql + "('" + id.replace("'", "''") + "', '" + title.replace("'", "''") + "', '" + recommendList[i]['id'].replace("'", "''") + "', '" + recommendList[i]['name'].replace("'", "''") + "')"
-            if i != len(data)-1:
+            if i != len(recommendList)-1:
                 sql = sql + ","
             else:
                 sql = sql + ";"
@@ -43,7 +43,7 @@ class SaveData:
         sql = "insert into mediadb.media_attender (id, title, attender_id, attender_name, attender_type) values "
         for i in range(len(dataList)):
             sql = sql + "('" + id.replace("'", "''") + "', '" + title.replace("'", "''") + "', '" + dataList[i]['id'].replace("'", "''") + "', '" + dataList[i]['name'].replace("'", "''") + "', '" + type.replace("'", "''") + "')"
-            if i != len(data)-1:
+            if i != len(dataList)-1:
                 sql = sql + ","
             else:
                 sql = sql + ";"
@@ -71,10 +71,19 @@ class SaveData:
 
     # 存储剧集详情, 人员, 图片, 获奖情况爬取进度
     def update_media_history(self, type):
-        sql = "update mediadb.query_history_data set num = num + 1 where type = " + type + ";"
+        sql = "update mediadb.query_history_data set num = num + 1 where type = '" + type + "' ;"
         mysql().updateOperation(sql)
 
     # 存储剧集获奖数据
+    def save_media_award(self, dataList):
+        sql = "insert into mediadb.media_award (id, title, award_name, award_year, award_type, award_user_id, award_user_name) values "
+        for i in range(len(dataList)):
+            sql = sql + "('" + dataList[i]['id'].replace("'", "''") + "', '" + dataList[i]['title'].replace("'", "''") + "', '" + dataList[i]['awardName'].replace("'", "''") + "', '" + dataList[i]['awardYear'].replace("'", "''") + "', '" + dataList[i]['awardType'].replace("'", "''") + "', '" + dataList[i]['awardUserId'].replace("'", "''") + "', '" + dataList[i]['awardUserName'].replace("'", "''") + "')"
+            if i != len(dataList) - 1:
+                sql = sql + ","
+            else:
+                sql = sql + ";"
+        mysql().insertOperation(sql)
 
     # 存储人员详情
     def save_perform_detail(self):

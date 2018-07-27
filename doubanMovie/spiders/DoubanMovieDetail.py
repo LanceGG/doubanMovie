@@ -7,14 +7,15 @@ from doubanMovie.spiders.SaveData import SaveData
 
 class DoubanMovieDetail(Spider):
     name = 'doubanMovieDetail'
+    type = 'DETAIL'
 
     def start_requests(self):
-        history = SaveData().query_media_history('DETAIL')[0][1]
+        history = SaveData().query_media_history(self.type)[0][1]
         mediaDataList = SaveData().query_media_data(history, 1)[0]
         if len(mediaDataList) > 0:
             dataItem = mediaDataList
             yield Request(dataItem[4],
-                          meta={'classify': dataItem[5], 'id': dataItem[1], 'title': dataItem[2],
+                          meta={'classify': dataItem[5], 'id': str(dataItem[1]), 'title': dataItem[2],
                                 'history': history + 1},
                           callback=self.parse_movie_detail)
 
@@ -141,9 +142,9 @@ class DoubanMovieDetail(Spider):
         movieDetail['tags'] = tags
 
         # 剧情简介(ALL)
-        reportList = response.selector.xpath("//div[@class='indent']/span")[
-            len(response.selector.xpath("//div[@class='indent']/span")) - 2].xpath("./text()").extract()
-        movieDetail['report'] = ''.join(reportList)
+        if(len(response.selector.xpath("//div[@class='indent']/span")) > 2):
+            reportList = response.selector.xpath("//div[@class='indent']/span")[len(response.selector.xpath("//div[@class='indent']/span")) - 2].xpath("./text()").extract()
+            movieDetail['report'] = ''.join(reportList)
 
         # 推荐(ALL)
         recommendTagList = response.selector.xpath("//div[@class='recommendations-bd']/dl/dd/a")
@@ -162,11 +163,12 @@ class DoubanMovieDetail(Spider):
         SaveData().save_media_attr(directorList, response.meta['id'], response.meta['title'], "DIRECTOR")
         SaveData().save_media_attr(writerList, response.meta['id'], response.meta['title'], "WRITER")
         SaveData().save_media_attr(performerList, response.meta['id'], response.meta['title'], "PERFORMER")
+        SaveData().update_media_history(self.type)
 
         mediaDataList = SaveData().query_media_data(response.meta['history'], 1)[0]
         if len(mediaDataList) > 0:
-            dataItem = mediaDataList[0]
-            yield Request(dataItem['url'],
-                          meta={'classify': dataItem['classify'], 'id': dataItem['id'], 'title': dataItem['title'],
+            dataItem = mediaDataList
+            yield Request(dataItem[4],
+                          meta={'classify': dataItem[5], 'id': str(dataItem[1]), 'title': dataItem[2],
                                 'history': response.meta['history'] + 1},
                           callback=self.parse_movie_detail)

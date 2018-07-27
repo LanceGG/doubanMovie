@@ -22,46 +22,46 @@ drop table mediadb.media_detail;
 create table mediadb.media_detail (
 	media_detail_id int auto_increment primary key,
 	id int not NULL,
-    title varchar(200),
-    title_long varchar(300),
-    m_year varchar(10),
+    title varchar(300),
+    title_long varchar(400),
+    m_year varchar(100),
     classify varchar(16),
     m_type varchar(200),
     country varchar(200),
     m_language varchar(100),
     release_date varchar(100),
-    runtime varchar(10),
-    season varchar(10),
-    episodes varchar(10),
-    along_run_time varchar(10),
+    runtime varchar(100),
+    season varchar(100),
+    episodes varchar(100),
+    along_run_time varchar(100),
     alias varchar(200),
-    imdb_id varchar(32),
-    score varchar(10),
-    stars5 varchar(20),
-    stars4 varchar(20),
-    stars3 varchar(20),
-    stars2 varchar(20),
-    stars1 varchar(20),
+    imdb_id varchar(50),
+    score varchar(50),
+    stars5 varchar(50),
+    stars4 varchar(50),
+    stars3 varchar(50),
+    stars2 varchar(50),
+    stars1 varchar(50),
     report varchar(6000),
-    people_num varchar(10),
-    tags varchar(300),
+    people_num varchar(50),
+    tags varchar(400),
     index media_detail_real_id (id)
 );
-
+drop table mediadb.media_recommend;
 create table mediadb.media_recommend (
 	media_recommend_id int auto_increment primary key,
 	id int not NULL,
-    title varchar(200),
+    title varchar(300),
     recommend_id int,
-    recommend_title varchar(200),
+    recommend_title varchar(300),
     index media_recommend_real_id (id)
 );
-
+drop table mediadb.media_attender;
 create table mediadb.media_attender (
 	media_attender_id int auto_increment primary key,
 	id int not NULL,
-    title varchar(200),
-    attender_id int,
+    title varchar(300),
+    attender_id varchar(240),
     attender_name varchar(240),
     attender_type varchar(16),
     index media_attender_real_id (id)
@@ -86,5 +86,16 @@ create table mediadb.media_actor (
     en_name varchar(200),
     cn_name varchar(200),
     members varchar(200),
-    imdb_id varchar(32),
-)
+    imdb_id varchar(32)
+);
+
+create table mediadb.media_award (
+	media_award_id int auto_increment primary key,
+    id int not NULL,
+    title varchar(300),
+    award_name varchar(200),
+    award_year varchar(50),
+    award_type varchar(200),
+    award_user_id varchar(240),
+    award_user_name varchar(240)
+);
