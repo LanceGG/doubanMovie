@@ -85,6 +85,17 @@ class SaveData:
                 sql = sql + ";"
         mysql().insertOperation(sql)
 
+    # 存储图片id
+    def save_media_pic_id(self, dataList):
+        sql = "insert into mediadb.media_pic (id, title, pic_id) values "
+        for i in range(len(dataList)):
+            sql = sql + "('" + dataList[i]['id'].replace("'", "''") + "', '" + dataList[i]['title'].replace("'", "''") + "', '" + dataList[i]['picId'].replace("'", "''") + "')"
+            if i != len(dataList) - 1:
+                sql = sql + ","
+            else:
+                sql = sql + ";"
+        mysql().insertOperation(sql)
+
     # 存储人员详情
     def save_perform_detail(self):
         pass
