@@ -91,7 +91,7 @@ DOWNLOADER_MIDDLEWARES = {
     # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
     # Disable compression middleware, so the actual HTML pages are cached
 }
-
+HTTPERROR_ALLOWED_CODES = [403,  404, 301, 302]
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'doubanMovie (+http://www.yourdomain.com)'
 
@@ -142,8 +142,11 @@ DOWNLOAD_DELAY = 3
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'doubanMovie.pipelines.DoubanmoviePipeline': 16,
+    'doubanMovie.pipelines.DoubanmoviePipeline': 1,
+    'doubanMovie.pipelines.MyImagesPipeline':1
 }
+IMAGES_URLS_FIELD = 'url'
+IMAGES_STORE = r'.'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

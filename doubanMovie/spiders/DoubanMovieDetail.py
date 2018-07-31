@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from scrapy.spiders import Spider
 from scrapy import Request
+import time
 import urllib.parse
 from doubanMovie.spiders.SaveData import SaveData
 
@@ -143,9 +144,10 @@ class DoubanMovieDetail(Spider):
             movieDetail['tags'] = tags
 
             # 剧情简介(ALL)
-            if(len(response.selector.xpath("//div[@class='indent']/span")) > 2):
-                reportList = response.selector.xpath("//div[@class='indent']/span")[len(response.selector.xpath("//div[@class='indent']/span")) - 2].xpath("./text()").extract()
-                movieDetail['report'] = ''.join(reportList)
+            # if(len(response.selector.xpath("//div[@class='indent']/span")) > 2):
+            #             #     reportList = response.selector.xpath("//div[@class='indent']/span")[len(response.selector.xpath("//div[@class='indent']/span")) - 2].xpath("./text()").extract()
+            report = ''.join(response.selector.xpath("//span[@property='v:summary']/text()").extract())
+            movieDetail['report'] = report
 
             # 推荐(ALL)
             recommendTagList = response.selector.xpath("//div[@class='recommendations-bd']/dl/dd/a")
@@ -158,7 +160,6 @@ class DoubanMovieDetail(Spider):
                 recommendList.append(recommend)
             movieDetail['recommendList'] = recommendList
             print("影片Detail")
-            print(movieDetail)
             SaveData().save_media_detail(movieDetail)
             SaveData().save_media_recommend(recommendList, response.meta['id'], response.meta['title'])
             if len(directorList) > 0:
@@ -178,6 +179,16 @@ class DoubanMovieDetail(Spider):
                               callback=self.parse_movie_detail)
         elif response.status == 404:
             SaveData().update_media_history(self.type)
+            mediaDataList = SaveData().query_media_data(response.meta['history'], 1)[0]
+            if len(mediaDataList) > 0:
+                dataItem = mediaDataList
+                yield Request(dataItem[4],
+                              meta={'classify': dataItem[5], 'id': str(dataItem[1]), 'title': dataItem[2],
+                                    'history': response.meta['history'] + 1},
+                              callback=self.parse_movie_detail)
+        elif response.status == 301 or response.status == 302:
+            SaveData().update_media_history(self.type)
+            time.sleep(10)
             mediaDataList = SaveData().query_media_data(response.meta['history'], 1)[0]
             if len(mediaDataList) > 0:
                 dataItem = mediaDataList

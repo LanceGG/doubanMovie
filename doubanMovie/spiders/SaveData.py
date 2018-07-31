@@ -18,13 +18,13 @@ class SaveData:
     def save_media_detail(self, data):
         sql = "INSERT INTO `mediadb`.`media_detail` (`id`,`title`,`title_long`,`m_year`,`classify`," \
               "`m_type`,`country`,`m_language`,`release_date`,`runtime`,`season`,`episodes`,`along_run_time`,`alias`," \
-              "`imdb_id`,`score`,`stars5`,`stars4`,`stars3`,`stars2`,`stars1`,`people_num`,`tags`)VALUES"
+              "`imdb_id`,`score`,`stars5`,`stars4`,`stars3`,`stars2`,`stars1`,`people_num`,`tags`,`report`)VALUES"
         sql = sql + "('" + data['id'].replace("'", "''") + "', '" + data['title'].replace("'", "''") + "', '" + data['titleLong'].replace("'", "''") + "', '" + data['year'].replace("'", "''") \
               + "', '" + data['classify'].replace("'", "''") + "', '" + data['type'].replace("'", "''") + "', '" + data['country'].replace("'", "''") + "', '" + data['language'].replace("'", "''") \
               + "', '" + data['releaseDate'].replace("'", "''") + "', '" + data['runtime'].replace("'", "''") + "', '" + data['season'].replace("'", "''") + "', '" + data['episodes'].replace("'", "''") \
               + "', '" + data['alongRuntime'].replace("'", "''") + "', '" + data['alias'].replace("'", "''") + "', '" + data['imdbId'].replace("'", "''") + "', '" + data['score'].replace("'", "''") \
               + "', '" + data['rating']['stars5'].replace("'", "''") + "', '" + data['rating']['stars4'].replace("'", "''") + "', '" + data['rating']['stars3'].replace("'", "''") + "', '" + data['rating']['stars2'].replace("'", "''") \
-              + "', '" + data['rating']['stars1'].replace("'", "''") + "', '" + data['rating']['peopleNum'].replace("'", "''") + "', '" + data['tags'].replace("'", "''") + "');"
+              + "', '" + data['rating']['stars1'].replace("'", "''") + "', '" + data['rating']['peopleNum'].replace("'", "''") + "', '" + data['tags'].replace("'", "''") + "', '" + data['report'].replace("'", "''") + "');"
         mysql().insertOperation(sql)
 
     # 插入剧集推荐
@@ -64,6 +64,10 @@ class SaveData:
         sql = "select * from mediadb.media_simple order by media_id limit " + str(start) + ", " + str(size) + ";"
         return mysql().queryOperation(sql)
 
+    # 查找演员的数据
+    def query_actor_id(self):
+        pass
+
     # 查找剧集详情, 人员, 图片, 获奖情况爬取进度
     def query_media_history(self, type):
         sql = "select * from mediadb.query_history_data where type = '" + str(type) + "';"
@@ -99,3 +103,7 @@ class SaveData:
     # 存储人员详情
     def save_perform_detail(self):
         pass
+
+    def query_media_pic_id(self, movieId):
+        sql = "select * from mediadb.media_pic where id = " + movieId + ";"
+        return mysql().queryOperation(sql)

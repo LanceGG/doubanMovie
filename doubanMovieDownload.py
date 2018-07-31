@@ -3,4 +3,4 @@
 
 from scrapy import cmdline
 
-cmdline.execute('scrapy crawl doubanMovieActor'.split())
+cmdline.execute('scrapy crawl doubanMovieDownload'.split())

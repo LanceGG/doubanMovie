@@ -1,5 +1,6 @@
 use mediadb;
 
+drop table if exists mediadb.history_data;
 create table mediadb.history_data (
 	id int auto_increment primary key,
 	target_num int default 0,
@@ -7,7 +8,7 @@ create table mediadb.history_data (
 );
 insert into mediadb.history_data (id, target_num, num) values (1, 0, 0);
 
-drop table mediadb.media_simple;
+drop table if exists mediadb.media_simple;
 create table mediadb.media_simple (
 	media_id int auto_increment primary key,
 	id int not NULL,
@@ -18,7 +19,7 @@ create table mediadb.media_simple (
     index media_real_id ( id )
 );
 
-drop table mediadb.media_detail;
+drop table if exists mediadb.media_detail;
 create table mediadb.media_detail (
 	media_detail_id int auto_increment primary key,
 	id int not NULL,
@@ -47,7 +48,8 @@ create table mediadb.media_detail (
     tags varchar(400),
     index media_detail_real_id (id)
 );
-drop table mediadb.media_recommend;
+
+drop table if exists mediadb.media_recommend;
 create table mediadb.media_recommend (
 	media_recommend_id int auto_increment primary key,
 	id int not NULL,
@@ -56,7 +58,8 @@ create table mediadb.media_recommend (
     recommend_title varchar(300),
     index media_recommend_real_id (id)
 );
-drop table mediadb.media_attender;
+
+drop table if exists mediadb.media_attender;
 create table mediadb.media_attender (
 	media_attender_id int auto_increment primary key,
 	id int not NULL,
@@ -67,6 +70,7 @@ create table mediadb.media_attender (
     index media_attender_real_id (id)
 );
 
+drop table if exists media.query_history_data;
 create table mediadb.query_history_data (
 	type varchar(10),
     num int
@@ -76,6 +80,7 @@ insert into mediadb.query_history_data (type, num) values ('ACTOR', 0);
 insert into mediadb.query_history_data (type, num) values ('AWARD', 0);
 insert into mediadb.query_history_data (type, num) values ('PIC', 0);
 
+drop table if exists mediadb.media_actor;
 create table mediadb.media_actor (
 	media_actor_id int auto_increment primary key,
     id int not NULL,
@@ -86,9 +91,11 @@ create table mediadb.media_actor (
     en_name varchar(200),
     cn_name varchar(200),
     members varchar(200),
-    imdb_id varchar(32)
+    imdb_id varchar(32),
+    report varchar(6000)
 );
 
+drop table if exists mediadb.media_award;
 create table mediadb.media_award (
 	media_award_id int auto_increment primary key,
     id int not NULL,
@@ -98,4 +105,12 @@ create table mediadb.media_award (
     award_type varchar(200),
     award_user_id varchar(240),
     award_user_name varchar(240)
+);
+
+drop table if exists mediadb.media_pic;
+create table mediadb.media_pic (
+	media_pic_id int auto_increment primary key,
+    id int not NULL,
+    title varchar(300),
+    pic_id varchar(100)
 );
