@@ -19,11 +19,11 @@ class DoubanMovieDownLoad(Spider):
         item = DoubanMovieItem()
         history = SaveData().query_media_history(self.type)[0][1]
         mediaDataList = SaveData().query_media_data(history, 1)[0]
-        while len(mediaDataList) > 0:
-            dataList = SaveData().query_media_pic_id(str(mediaDataList[1]))
-            item['movieId'] = str(mediaDataList[1])
-            item['moviePicIds'] = dataList
-            yield item
-            # SaveData().update_media_history(self.type)
-            # history = history+1
-            # mediaDataList = SaveData().query_media_data(history, 1)[0]
+        # while len(mediaDataList) > 0:
+        dataList = SaveData().query_media_pic_id(str(mediaDataList[1]))
+        item['movieId'] = str(mediaDataList[1])
+        item['moviePicIds'] = dataList
+        yield item
+        # SaveData().update_media_history(self.type)
+        # history = history+1
+        # mediaDataList = SaveData().query_media_data(history, 1)[0]
